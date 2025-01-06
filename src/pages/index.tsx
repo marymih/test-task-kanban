@@ -37,41 +37,54 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Kanban Board</h1>
-      <button onClick={handleAddDocument}>Добавить документ</button>
-      <div style={{ display: 'flex', gap: '20px', marginTop: '20px' }}>
+    <div className="container">
+      <h1 className="text-center my-4">Kanban Board</h1>
+      <button className="btn btn-primary mb-4" onClick={handleAddDocument}>
+        Add Document
+      </button>
+      <div className="row">
         {Object.entries(groupedDocuments).map(([status, docs]) => (
-          <div
-            key={status}
-            style={{ border: '1px solid black', padding: '10px', width: '30%' }}
-          >
-            <h2>{status.replace('-', ' ').toUpperCase()}</h2>
-            <ul>
-              {docs.map((doc) => (
-                <li key={doc.id}>
-                  {doc.title}
-                  <button
-                    style={{ marginLeft: '10px' }}
-                    onClick={() =>
-                      handleMoveDocument(
-                        doc.id,
-                        status === 'in-progress' ? 'under-review' : 'completed'
-                      )
-                    }
-                  >
-                    Move to{' '}
-                    {status === 'in-progress' ? 'Under Review' : 'Completed'}
-                  </button>
-                  <button
-                    style={{ marginLeft: '10px', color: 'red' }}
-                    onClick={() => handleDeleteDocument(doc.id)}
-                  >
-                    Remove
-                  </button>
-                </li>
-              ))}
-            </ul>
+          <div key={status} className="col-md-4">
+            <div className="card">
+              <div className="card-header bg-secondary text-white">
+                <h5 className="card-title text-center">
+                  {status.replace('-', ' ').toUpperCase()}
+                </h5>
+              </div>
+              <div className="card-body">
+                <ul className='list-group'>
+                  {docs.map((doc) => (
+                    <li key={doc.id} className='list-group-item d-flex justify-content-between align-items-center'>
+                      {doc.title}
+                      <div>
+                        {status !== 'completed' && (
+                          <button
+                          className='btn btn-sm btn-success me-2'
+                          onClick={() =>
+                            handleMoveDocument(
+                              doc.id,
+                              status === 'in-progress'
+                                ? 'under-review'
+                                : 'completed'
+                            )
+                          }
+                        >
+                          Move
+                        </button>
+                        )}
+                      </div>
+
+                      <button
+                        className='btn btn-sm btn-danger'
+                        onClick={() => handleDeleteDocument(doc.id)}
+                      >
+                        Delete
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         ))}
       </div>
