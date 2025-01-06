@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../redux/store';
 import {
@@ -10,6 +11,8 @@ const Home: React.FC = () => {
   const documents = useSelector((state: RootState) => state.board);
   const dispatch = useDispatch();
 
+  const [newTitle, setNewTitle] = useState('');
+
   const groupedDocuments = {
     'in-progress': documents.filter((doc) => doc.status === 'in-progress'),
     'under-review': documents.filter((doc) => doc.status === 'under-review'),
@@ -17,12 +20,17 @@ const Home: React.FC = () => {
   };
 
   const handleAddDocument = () => {
+    if (newTitle.trim() === '') {
+      alert('Please enter a title for the document');
+      return;
+    }
     const newDocument = {
       id: Date.now().toString(),
-      title: `Document ${Date.now()}`,
+      title: newTitle,
       status: 'in-progress' as const,
     };
     dispatch(addDocument(newDocument));
+    setNewTitle('');
   };
 
   const handleDeleteDocument = (id: string) => {
@@ -39,6 +47,15 @@ const Home: React.FC = () => {
   return (
     <div className="container">
       <h1 className="text-center my-4">Kanban Board</h1>
+      <div className="mb-4">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Enter document title"
+          value={newTitle}
+          onChange={(e) => setNewTitle(e.target.value)}
+        />
+      </div>
       <button className="btn btn-primary mb-4" onClick={handleAddDocument}>
         Add Document
       </button>
