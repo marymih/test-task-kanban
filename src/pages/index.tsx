@@ -31,7 +31,9 @@ const Card: React.FC<{ document: Document }> = ({ document}) => {
 
   return (
     <li ref={dragRef}
-      className="list-group-item d-flex justify-content-between align-items-center">
+      className="list-group-item d-flex justify-content-between align-items-center"
+      style={{ cursor: 'pointer' }}
+    >
       {document.title}
       <button className='btn btn-sm btn-danger' onClick={() => handleDeleteDocument(document.id)}>Delete</button>
     </li>
@@ -44,19 +46,29 @@ const Column: React.FC<{
 }> = ({ status, documents }) => {
   const dispatch = useDispatch();
 
-  const [, dropRef] = useDrop(() => ({
+  const [{ isOver}, dropRef] = useDrop(() => ({
     accept: ITEM_TYPE,
     drop: (item: { id: string; status: string }) => {
       if (item.status !== status) {
         dispatch(updateDocumentStatus({ id: item.id, newStatus: status }));
       }
     },
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+    }),
   }));
 
   return (
-    <div ref={dropRef} className="card">
-      <div className="card-header bg-secondary text-white">
-        <h5 className="card-title text-center">
+    <div
+      ref={dropRef}
+      className={`p-3 mb-3 ${isOver ? 'bg-light' : ''}`}
+      style={{ minHeight: '200px' }}
+    >
+      <div
+        className="card-header bg-secondary text-white mb-3 d-flex justify-content-center align-items-center"
+        style={{ height: '50px' }}
+      >
+        <h5 className="card-title">
           {status.replace('-', ' ').toUpperCase()}
         </h5>
       </div>
