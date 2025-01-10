@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useDrag, useDrop, DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -18,10 +18,13 @@ interface Document {
 }
 
 const Card: React.FC<{ document: Document }> = ({ document}) => {
-  const [, dragRef] = useDrag(() => ({
+  const dragRef = useRef<HTMLLIElement>(null);
+  const [, connectRef] = useDrag(() => ({
     type: ITEM_TYPE,
     item: { id: document.id, status: document.status },
   }));
+
+  connectRef(dragRef);
 
   const dispatch = useDispatch();
 
@@ -46,7 +49,9 @@ const Column: React.FC<{
 }> = ({ status, documents }) => {
   const dispatch = useDispatch();
 
-  const [{ isOver}, dropRef] = useDrop(() => ({
+  const dropRef = useRef<HTMLDivElement>(null);
+
+  const [{ isOver}, connectRef] = useDrop(() => ({
     accept: ITEM_TYPE,
     drop: (item: { id: string; status: string }) => {
       if (item.status !== status) {
@@ -57,6 +62,8 @@ const Column: React.FC<{
       isOver: monitor.isOver(),
     }),
   }));
+
+  connectRef(dropRef);
 
   return (
     <div
