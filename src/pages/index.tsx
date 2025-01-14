@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
+import { motion, AnimatePresence } from 'framer-motion';
 import { useDrag, useDrop, DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { RootState } from '../redux/store';
@@ -33,13 +34,18 @@ const Card: React.FC<{ document: Document }> = ({ document}) => {
   };
 
   return (
-    <li ref={dragRef}
-      className="list-group-item d-flex justify-content-between align-items-center"
-      style={{ cursor: 'pointer' }}
+    <motion.li ref={dragRef}
+      className="list-group-item d-flex justify-content-between align-items-center mb-2"
+      style={{ cursor: 'pointer', borderTop: '1px solid #dee2e6', borderRadius: '5px' }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      exit={{ opacity: 0, x: -50 }}
+      transition={{ duration: 0.3 }}
+      layout
     >
       {document.title}
       <button className='btn btn-sm btn-danger' onClick={() => handleDeleteDocument(document.id)}>Delete</button>
-    </li>
+    </motion.li>
   );
 }
 
@@ -66,7 +72,7 @@ const Column: React.FC<{
   connectRef(dropRef);
 
   return (
-    <div
+    <motion.div
       ref={dropRef}
       className={`p-3 mb-3 ${isOver ? 'bg-light' : ''}`}
       style={{ minHeight: '200px' }}
@@ -80,13 +86,15 @@ const Column: React.FC<{
         </h5>
       </div>
       <div className="card-body">
-        <ul className='list-group'>
-          {documents.map((doc) => (
-            <Card key={doc.id} document={doc} />
-          ))}
-        </ul>
+        <motion.ul className='list-group' layout>
+          <AnimatePresence initial={false}>
+            {documents.map((doc) => (
+              <Card key={doc.id} document={doc} />
+            ))}
+          </AnimatePresence>
+        </motion.ul>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
