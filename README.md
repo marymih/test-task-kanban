@@ -1,19 +1,23 @@
 # Kanban Board
 
-This project is the third test task for a frontend developer as part of the Hexlet and Habr Carreer challenge.
+This project is the third test task for a frontend developer as part of the Hexlet and Habr Career challenge.
 
 ## Description
 
 This is a single-page application (SPA) representing a Kanban board for managing documents. It allows users to add, manage, and move documents across different stages: "In Progress", "Under Review", and "Completed".
 
-## Functionality
+## Key Features
 
+- **Dynamic Rendering:**  
+  Supports both **Server-Side Rendering (SSR)** and **Client-Side Rendering (CSR)** with Next.js.  
+- **State Management:**  
+  Uses **Redux Toolkit** for efficient state management.
 - **Three Columns:**  
-  Displays documents in three categories: In Progress, Under Review, and Completed.
+  Displays documents in three categories: In Progress, Under Review, and Completed.  
 - **Drag-and-Drop:**  
-  Allows users to drag documents between columns for easy organization.
-- **Adding Documents:**  
-  Users can add a new document to the "In Progress" column.
+  Allows users to drag documents between columns for easy organization.  
+- **Document Management:**  
+  Users can add new documents to the "In Progress" column. 
 
 ## Launch Instructions
 1. Clone the repository:
