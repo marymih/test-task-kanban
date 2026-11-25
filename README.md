@@ -4,6 +4,8 @@ A small Kanban board for managing documents, built as a frontend test task (Hexl
 
 **Live demo:** https://kanban-board-mauve-kappa.vercel.app/
 
+![Kanban Board screenshot](docs/screenshot.png)
+
 ## Features
 
 - Three columns: In Progress, Under Review, Completed
