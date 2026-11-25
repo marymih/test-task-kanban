@@ -1,51 +1,33 @@
 # Kanban Board
 
-This project is the third test task for a frontend developer as part of the Hexlet and Habr Career challenge.
+A small Kanban board for managing documents, built as a frontend test task (Hexlet x Habr Career challenge).
 
-## Description
+**Live demo:** https://kanban-board-mauve-kappa.vercel.app/
 
-This is a single-page application (SPA) representing a Kanban board for managing documents. It allows users to add, manage, and move documents across different stages: "In Progress", "Under Review", and "Completed".
+## Features
 
-## Key Features
+- Three columns: In Progress, Under Review, Completed
+- Drag and drop documents between columns (react-dnd)
+- Add new documents to "In Progress" and delete existing ones
+- Board state managed with Redux Toolkit
+- Card animations with Framer Motion
 
-- **Dynamic Rendering:**  
-  Supports both **Server-Side Rendering (SSR)** and **Client-Side Rendering (CSR)** with Next.js.  
-- **State Management:**  
-  Uses **Redux Toolkit** for efficient state management.
-- **Three Columns:**  
-  Displays documents in three categories: In Progress, Under Review, and Completed.  
-- **Drag-and-Drop:**  
-  Allows users to drag documents between columns for easy organization.  
-- **Document Management:**  
-  Users can add new documents to the "In Progress" column. 
+## Stack
 
-## Launch Instructions
-1. Clone the repository:
-  ```sh
-  git clone https://github.com/marymih/test-task-kanban.git
-  ```
+Next.js (Pages Router), React, TypeScript, Redux Toolkit, react-dnd, Framer Motion, Bootstrap
 
-2. Navigate to the project directory:
-  ```sh
-  cd test-task-kanban
-  ```
+## Run locally
 
-3. Install dependencies:
-  ```sh
-  npm install
-  ```
-4. Run the app:
-  ```sh
-  npm run dev
-  ```
-  The application will be available at http://localhost:3000.
+```sh
+git clone https://github.com/marymih/test-task-kanban.git
+cd test-task-kanban
+npm install
+npm run dev
+```
 
-## Technologies Used
-![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![Redux](https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=redux&logoColor=white)
-![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
+Then open http://localhost:3000.
 
-## Future Features
-- State Persistence: Save the board state in the browser's local storage (LocalStorage).
-- Document Filtering: Add a filter feature to search for documents by title across all columns.
+## Possible next steps
+
+- Persist the board in localStorage
+- Filter documents by title across all columns
